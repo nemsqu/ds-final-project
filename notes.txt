@@ -1,0 +1,6 @@
+Etsi linkit hyödyntäen wiki API, query, iwlinks.
+Use threading for different "child units" and communication between main worker & child units?
+Start threads inside the while loop looking for the links/routes? Or start threads and send data to them inside the routes?
+Lähe liikkeelle ekoista linkeistä --> jos polku/polkuja löytyy, ne on lyhimpiä. Jos ei, siirry seuraaviin linkkeihin, sama check.
+    Toista niin kauan, että ainakin 1 polku löytyy (while path == NULL tai mitä ikinä)
+    Counter joka kertoo degreen
