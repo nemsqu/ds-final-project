@@ -15,6 +15,7 @@ from pip._vendor import requests
 from threading import Thread
 import wikipedia
 
+
 paths = []
 success = []
 data = {}

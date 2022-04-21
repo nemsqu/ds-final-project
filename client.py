@@ -6,7 +6,6 @@
 from datetime import datetime
 import xmlrpc.client
 
-
 def menu():
     print("\nWhat would you like to do?")
     print("1) Add a new note")
