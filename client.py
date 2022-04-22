@@ -1,44 +1,48 @@
 #########################################################################################################
 # Nelli Kemi
-# 23.3.2022
+# 22.4.2022
+# Sources: Assignments 1 and 2, Wikipedia documentation, Python documentation
 #########################################################################################################
 
 from datetime import datetime
 import xmlrpc.client
 
-def menu():
-    print("\nWhat would you like to do?")
-    print("1) Add a new note")
-    print("2) Browse through your notebook")
-    print("3) Add a Wikipedia reference to an existing topic")
-    print("4) Quit")
-
-def add_wikipedia_note():
-    search_term = input("Search terms for looking up data on Wikipedia: ")
-    end = input("End term: ")
+def add_wikipedia_note(s):
+    print("\nFind the shortest path between two Wikipedia pages")
+    search_term = input("Starting page (input -1 to quit): ")
+    if search_term == "-1":
+        return -1
+    end = input("Ending page (input -1 to quit): ")
+    if end == "-1":
+        return -1
+    print("\n..... Looking for a path .....\n")
     try:
-        error = s.search_wikipedia(search_term, end)
+        path = s.find_shortest_path(search_term, end)
     except Exception as e:
         print(e)
         print("Please try again later.")
-        return
+        return 0
 
-    if error != "":
-        print(error)
-    else:
-        print(f"Note referencing Wikipedia added to topic {topic}")
+    if len(path) <= 1:
+        print("Couldn't find a path.")
+        print(path)
+        return 0
+    print(f"Found the following path of degree {len(path) - 1}:")
+    for i in range(len(path)):
+        if i == len(path)-1:
+            print(path[i])
+        else:
+            print(path[i], " > ", end="")
+    print('\n')
+    return 0
 
-s = xmlrpc.client.ServerProxy('http://localhost:8000')
-choice = "-1"
-while (choice != "0"):
-    menu()
-    choice = input("Your choice: ")
-    if choice == "3":
-        add_wikipedia_note()
-    elif choice == "4":
-        break
-    else:
-        print("Invalid choice. Please try again.")
+def main():  
+    s = xmlrpc.client.ServerProxy('http://localhost:8000')
+    run_app = 0
+    while (run_app == 0):
+        run_app = add_wikipedia_note(s)
+        
+    print("Closing the application.")
+    exit(0)
 
-print("Thank you for using the notebook.")
-exit(0)
+main()
