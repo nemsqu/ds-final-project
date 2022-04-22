@@ -69,7 +69,7 @@ def search_wikipedia(search_terms, paths_list, visited_pages, success, end):
             success.extend(found)
             lock.release()
             break
-        
+
         if len(success) != 0:
             break
         
